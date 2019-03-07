@@ -1,4 +1,5 @@
 import {ExtensionData, TabInfo, UserSettings} from '../../definitions';
+import { ColorblindnessType } from '../../generators/css-filter';
 
 export function getMockData(override = {}): ExtensionData {
     return Object.assign({
@@ -16,6 +17,8 @@ export function getMockData(override = {}): ExtensionData {
                 fontFamily: 'Segoe UI',
                 textStroke: 0,
                 textScale: 100,
+                useColorCorrection: true,
+                colorCorrectionType: ColorblindnessType.deuteranopia,
                 unclickedColor: '0000FF',
                 clickedColor: '551A8B',
                 engine: 'cssFilter',

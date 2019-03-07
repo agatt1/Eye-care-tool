@@ -26,8 +26,8 @@ export default function CBSettings({config, fonts, onChange}: FontSettingsProps)
             <div class="font-settings__font-select-container">
                 <div class="font-settings__font-select-container__line">
                     <CheckBox
-                        checked={config.useFont}
-                        //onchange={(e) => onChange({useFont: e.target.checked})}
+                        checked={config.useColorCorrection}
+                        onchange={(e) => onChange({useColorCorrection: e.target.checked})}
                     />
                     <Select
                         value={"Red/Green"}

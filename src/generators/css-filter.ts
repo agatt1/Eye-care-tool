@@ -11,6 +11,12 @@ export enum FilterMode {
     dark = 1
 }
 
+export enum ColorblindnessType {
+    deuteranopia = 0,
+    protanopia = 1,
+    tritanopia = 2,
+}
+
 export default function createCSSFilterStyleheet(config: FilterConfig, url: string, frameURL: string, inversionFixes: InversionFix[]) {
     const filterValue = getCSSFilterValue(config);
     const reverseFilterValue = 'invert(100%) hue-rotate(180deg)';

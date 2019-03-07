@@ -1,4 +1,4 @@
-import {FilterMode} from './generators/css-filter';
+import {FilterMode, ColorblindnessType} from './generators/css-filter';
 import { RGBA } from 'utils/color';
 
 export interface ExtensionData {
@@ -42,6 +42,8 @@ export interface FilterConfig {
     fontFamily: string;
     textStroke: number;
     textScale: number;
+    useColorCorrection: boolean;
+    colorCorrectionType: ColorblindnessType;
     linkColor: boolean;
     unclickedColor: string;
     clickedColor: string;
