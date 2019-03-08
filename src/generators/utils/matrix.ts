@@ -19,7 +19,11 @@ export function createFilterMatrix(config: FilterConfig) {
         m = multiplyMatrices(m, Matrix.invertNHue());
     }
     if (config.useColorCorrection) {
-        m = multiplyMatrices(Matrix.fullCorrectionDeuteranopia(), m);
+        if (config.colorblindnessType == 0) {
+            m = multiplyMatrices(Matrix.fullCorrectionDeuteranopia(), m);
+        } else if (config.colorblindnessType == 1) {
+            m = multiplyMatrices(Matrix.fullCorrectionProtanopia(), m);
+        }
     }
     return m;
 }
@@ -142,6 +146,14 @@ export const Matrix = {
             [0, 0, 0, 0, 1]
         ]
     },
+
+    fullCorrectionProtanopia() {
+        return [
+            [1, 0, 0, 0, 0],
+            [0.50894941008343, 0.49105389057512, 0, 0, 0],
+            [0.61732665235893, -0.61732264809677, 1, 0, 0],
+        ]
+    }
 };
 
 
