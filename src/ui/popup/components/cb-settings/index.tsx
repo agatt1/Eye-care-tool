@@ -1,8 +1,8 @@
 import {html} from 'malevic';
-import {CheckBox, UpDown, Toggle, Select, CustToggle} from '../../../controls';
+import {CheckBox, UpDown, Toggle, Select, CustToggle, Button} from '../../../controls';
 import {getLocalMessage} from '../../../../utils/locales';
 import {FilterConfig} from '../../../../definitions';
-
+import {hoverFunOld, enableHoverFun, hoverFun} from '../cb-settings/hoverFunctions'
 
 //most of this taken from fontsettings
 
@@ -52,13 +52,22 @@ export default function CBSettings({config, fonts, onChange}: FontSettingsProps)
             <CustToggle
                 //class="site-list-settings__toggle"
                 checked={true}
-                labelOn={getLocalMessage('enable_color_hover')}
-                labelOff={getLocalMessage('disable_color_hover')}
-                onChange={(value) => 0}
-                //onChange = {printName}
+                labelOn={getLocalMessage('disable_color_hover')}
+                labelOff={getLocalMessage('enable_color_hover')}
+                onChange={() => enableHoverFun()}
+                
             />
 
-            
+            <Button
+                onclick={() => hoverFun()}
+            >
+                HOVER
+            </Button>
+
         </section>
+        
     );
 }
+
+//<button id = "hoverButton" onClick = "hoverFun()">HOVER</button>
+//<input type="button" value="Click" onClick = "console.log('test')"></input>
