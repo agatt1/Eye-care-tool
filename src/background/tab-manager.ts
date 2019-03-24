@@ -56,6 +56,10 @@ export default class TabManager {
             if (type === 'fetch') {
                 const {url, responseType} = data;
 
+                                // Using custom response due to Chrome and Firefox incompatibility	
+                // Sometimes fetch error behaves like synchronous and sends `undefined`	
+                const sendResponse = (response) => chrome.tabs.sendMessage(sender.tab.id, {type: 'fetch-response', id, ...response});
+
                 try {
                     const response = await fetch(url, {cache: 'force-cache'});
                     if (response.ok) {
