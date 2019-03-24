@@ -49,24 +49,7 @@ const colorCorrectionTypes = [
 ];
 
 export default function CBSettings({config, fonts, onChange}: CbSettingsProps) {
-    return (
-        <section class="font-settings">
-            <div class="font-settings__font-select-container">
-                <div class="font-settings__font-select-container__line">
-                    <CheckBox
-                        checked={config.useColorCorrection}
-                        onchange={(e) => onChange({useColorCorrection: e.target.checked})}
-                    />
-                    <Select
-                        value={colorblindnessTypes.find(x => x.id == config.colorblindnessType).text}
-                        onChange={(value) => onChange({colorblindnessType: colorblindnessTypes.find(x => x.text == value).id})}
-                        options={colorblindnessTypes.map(x => x.text)}
-                    />
-                </div>
-                <label class="font-settings__font-select-container__label">
-                    {getLocalMessage('enable_cb')}
-                </label>
-            </div>
+    /*
             <UpDown
                 value={config.dummy_val}
                 min={0}
@@ -77,6 +60,34 @@ export default function CBSettings({config, fonts, onChange}: CbSettingsProps) {
                 onChange={(value) => onChange({dummy_val: value})}
                 //onChange={(value) =>0}
             />
+    */
+    return (
+        <section class="font-settings">
+            <div class="font-settings__font-select-container">
+                <div class="font-settings__font-select-container__line">
+                    <CheckBox
+                        checked={config.useColorCorrection}
+                        onchange={(e) => onChange({useColorCorrection: e.target.checked})}
+                    />
+                    <Select
+                        value={colorblindnessTypes.find(x => x.id == config.colorblindnessType).text}
+                        //onChange={(value) => onChange({colorblindnessType: colorblindnessTypes.find(x => x.text == value).id})}
+                        onChange={(value) => onChange({colorblindnessType: value})}
+                        options={colorblindnessTypes.reduce((map, x) => {
+                            map[x.id] = (
+                                <div>
+                                    {x.text}
+                                </div>
+                            );
+                            return map;
+                        }, {} as {[text: string]: Malevic.NodeDeclaration;})}
+                    />
+                </div>
+                <label class="font-settings__font-select-container__label">
+                    {getLocalMessage('enable_cb')}
+                </label>
+            </div>
+            
 
             <div style="display:flex; justify-content:center; width:97%; text-align:center;">
                 <div>

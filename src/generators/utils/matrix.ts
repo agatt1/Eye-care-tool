@@ -23,6 +23,8 @@ export function createFilterMatrix(config: FilterConfig) {
             m = multiplyMatrices(Matrix.fullCorrectionDeuteranopia(), m);
         } else if (config.colorblindnessType == 1) {
             m = multiplyMatrices(Matrix.fullCorrectionProtanopia(), m);
+        } else if (config.colorblindnessType == 2) {
+            m = multiplyMatrices(Matrix.fullCorrectionTritanopia(), m);
         }
     }
     return m;
@@ -152,6 +154,18 @@ export const Matrix = {
             [1, 0, 0, 0, 0],
             [0.50894941008343, 0.49105389057512, 0, 0, 0],
             [0.61732665235893, -0.61732264809677, 1, 0, 0],
+            [0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 1]
+        ]
+    },
+
+    fullCorrectionTritanopia() {
+        return [
+            [3.6143476462267, -2.6143824108141, 0, 0, 0],
+            [1.6143497395451, -0.6143712037127, 0, 0, 0],
+            [0, 0, 1, 0, 0],
+            [0, 0, 0, 1, 0],
+            [0, 0, 0, 0, 1]
         ]
     }
 };
