@@ -49,22 +49,10 @@ const colorCorrectionTypes = [
 ];
 
 export default function CBSettings({config, fonts, onChange}: CbSettingsProps) {
-    /*
-            <UpDown
-                value={config.dummy_val}
-                min={0}
-                max={1}
-                step={0.1}
-                default={0}
-                name={getLocalMessage('sensitivity')}
-                onChange={(value) => onChange({dummy_val: value})}
-                //onChange={(value) =>0}
-            />
-    */
     return (
-        <section class="font-settings">
-            <div class="font-settings__font-select-container">
-                <div class="font-settings__font-select-container__line">
+        <section class="cb-settings">
+            <div class="cb-settings__cb-select-container">
+                <div class="cb-settings__cb-select-container__line">
                     <CheckBox
                         checked={config.useColorCorrection}
                         onchange={(e) => onChange({useColorCorrection: e.target.checked})}
@@ -83,16 +71,25 @@ export default function CBSettings({config, fonts, onChange}: CbSettingsProps) {
                         }, {} as {[text: string]: Malevic.NodeDeclaration;})}
                     />
                 </div>
-                <label class="font-settings__font-select-container__label">
+                <label class="cb-settings__cb-select-container__label">
                     {getLocalMessage('enable_cb')}
                 </label>
+                <UpDown
+                    value={config.colorblindnessSensitivity * 100}
+                    min={0}
+                    max={100}
+                    step={10}
+                    default={0}
+                    name={getLocalMessage('sensitivity')}
+                    onChange={(value) => onChange({colorblindnessSensitivity: value / 100})}
+                />
             </div>
-            
+
 
             <div style="display:flex; justify-content:center; width:97%; text-align:center;">
                 <div>
                     <input class="jscolor jscolor-active" style="width:80px" value={config.unclickedColor} name="unclicked" onchange={(value) => onChange({unclickedColor: value.target.value})} />
-                    <label class="font-settings__font-select-container__label">
+                    <label class="cb-settings__cb-select-container__label">
                         {getLocalMessage('unvisited_link')}
                     </label>
                 </div>
@@ -102,7 +99,7 @@ export default function CBSettings({config, fonts, onChange}: CbSettingsProps) {
                 />
                 <div>
                     <input class="jscolor jscolor-active" style="width:80px" value={config.clickedColor} name="clicked" onchange={(value) => onChange({clickedColor: value.target.value})}/>
-                    <label class="font-settings__font-select-container__label">
+                    <label class="cb-settings__cb-select-container__label">
                         {getLocalMessage('visited_link')}
                     </label>
                 </div>
