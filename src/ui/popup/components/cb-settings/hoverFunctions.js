@@ -115,10 +115,10 @@ export function hoverFun(){
                         else if((hue >= 30) && (hue < 60)){
                             color = "orange";
                         }
-                        else if((hue >= 60) && (hue < 120)){
+                        else if((hue >= 60) && (hue < 110)){
                             color = "yellow";
                         }
-                        else if((hue >= 120) && (hue < 180)){
+                        else if((hue >= 110) && (hue < 180)){
                             color = "green";
                         }
                         else if((hue >= 180) && (hue < 240)){
@@ -136,15 +136,124 @@ export function hoverFun(){
                         return color;
                     }
 
-                        document.onmousemove = function(e){
+                    function rgbToColor(rgbArray){
+                        var colorArray = [];
+                        var rgbArrayMinIndex = 0;
+                        var tempMinDistance = 10000000;
+                        var rgb_final_color = "unknown";
+                        var r1 = rgbArray[0];
+                        var b1 = rgbArray[1];
+                        var g1 = rgbArray[2];
+                        var red = [255, 0, 255];
+                        var green = [0, 255, 0];
+                        var blue = [0, 0, 255];
+                        var pink = [255, 192, 203];
+                        var light_green = [144, 238, 144];
+                        var orange = [255, 165, 0];
+                        var yellow = [255, 255, 0];
+                        var brown = [165, 42, 42];
+                        var light_blue = [173, 216, 230];
+                        var purple = [128, 0, 128];
+                        var white = [255, 255, 255];
+                        var gray = [128, 128, 128];
+                        var black = [0, 0, 0];
+                        colorArray.push(red);
+                        colorArray.push(green);
+                        colorArray.push(blue);
+                        colorArray.push(pink);
+                        colorArray.push(light_green);
+                        colorArray.push(orange);
+                        colorArray.push(yellow);
+                        colorArray.push(brown);
+                        colorArray.push(light_blue);
+                        colorArray.push(purple);
+                        colorArray.push(white);
+                        colorArray.push(gray);
+                        colorArray.push(black);
+                        //console.log(colorArray[0][1]);
+
+                        for(i = 0; i < colorArray.length; i++){
+                            
+                            var rgbDistance = Math.abs(r1 - colorArray[i][0]) + 
+                                              Math.abs(b1 - colorArray[i][1]) + 
+                                              Math.abs(g1 - colorArray[i][2]);
+                            if(rgbDistance < tempMinDistance){
+                                rgbArrayMinIndex = i;
+                                tempMinDistance = rgbDistance;
+                            }
+                             
+                        }
+
+                        switch (rgbArrayMinIndex) {
+                            case 0:
+                                rgb_final_color = "red";
+                                break;
+                            case 1:
+                                rgb_final_color = "green";
+                                break;
+                            case 2:
+                                rgb_final_color = "blue";
+                                break;
+                            case 3:
+                                rgb_final_color = "pink";
+                                break;
+                            case 4:
+                                rgb_final_color = "light green";
+                                break;
+                            case 5:
+                                rgb_final_color = "orange";
+                                break;
+                            case 6:
+                                rgb_final_color = "yellow";
+                                break;
+                            case 7:
+                                rgb_final_color = "brown";
+                                break;
+                            case 8:
+                                rgb_final_color = "light blue";
+                                break;
+                            case 9:
+                                rgb_final_color = "purple";
+                                break;
+                            case 10:
+                                rgb_final_color = "white";
+                                break;
+                            case 11:
+                                rgb_final_color = "gray";
+                                break;
+                            case 12:
+                                rgb_final_color = "black";
+                                break;
+                        
+                            default:
+                                break;
+                        }
+
+                        return rgb_final_color;
+                    }
+
+                    var ColorHoverThing = document.createElement('div');
+                    ColorHoverThing.textContent = "Color";
+                    ColorHoverThing.id = "hoverColorDiv"
+                    ColorHoverThing.setAttribute("style", "position: absolute; left: 500px; top: 30px; font-size: 50px; color: red");
+                    var root = document.documentElement;
+                    root.prepend(ColorHoverThing);
+                    
+                    
+
+                        var mouseMoveFun = function(e){
                             try {
                                 var mousecoords = getMousePos(e);
                                 var image_data = prepareCanvas();
                                 var rgbArray = getPixelXY(image_data,mousecoords.x,mousecoords.y);
                                 var hsvArray = rgbtoHSV(rgbArray);
                                 var final_color = HSVtoColor(hsvArray);
+                                //var final_color = rgbToColor(rgbArray);
+                                //console.log(rgbArray);
                                 console.log(hsvArray[0], hsvArray[1], hsvArray[2]);
-                                console.log(final_color);
+                                //console.log(final_color);
+                                //html stuff
+                                ColorHoverThing.textContent = final_color;
                                 //console.log(hsvArray[0]);    
                             } catch (error) {
                                 console.log("DOMException - source width is 0");
@@ -153,17 +262,41 @@ export function hoverFun(){
                             //console.log(mousecoords.x, mousecoords.y);
                             //console.log(final_img.width, final_img.height);
                     }
+                    document.addEventListener("mousemove", mouseMoveFun);
+
+                    
+                    var removeFunction = function(e){
+                        window.removeEventListener("scroll", removeFunction);
+                        document.removeEventListener("mousemove", mouseMoveFun);
+                        ColorHoverThing.remove();
+                        
+                        chrome.extension.sendMessage({'message': "User has scrolled"})
+                        console.log("message sent");
+                    }
+                    window.addEventListener("scroll", removeFunction);
+
+                   
         
                    return {success: true};
                 } + ')('+ JSON.stringify(dataToWebPage) + ');'
             }, function(results){
-        
+                console.log("script callback");
             });
-            
         });
+        console.log("execute script done");
     }
 
     getColor();
+    console.log("finished getColor");
+    chrome.extension.onMessage.addListener(function(myMessage, sender, sendResponse){
+        console.log(myMessage);
+        if('message' in myMessage)
+            if(myMessage.message == "User has scrolled"){
+                getColor();
+            }
+    })
+
+    
 }
 
 //TODO: Fix this function so you can actually disable the hoverFunction

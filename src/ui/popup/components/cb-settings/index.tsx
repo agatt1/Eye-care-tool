@@ -3,39 +3,68 @@ import {CheckBox, UpDown, Toggle, Select, CustToggle, Button} from '../../../con
 import {getLocalMessage} from '../../../../utils/locales';
 import {FilterConfig} from '../../../../definitions';
 import {hoverFunOld, enableHoverFun, hoverFun} from '../cb-settings/hoverFunctions'
+import {ColorblindnessType, ColorCorrectionType} from '../../../../generators/css-filter'
+
 
 //most of this taken from fontsettings
 
-interface FontSettingsProps {
+interface CbSettingsProps {
     config: FilterConfig;
     fonts: string[];
     onChange: (config: Partial<FilterConfig>) => void;
 }
 
+const colorblindnessTypes = [
+    { 
+        "id": ColorblindnessType.deuteranopia, 
+        "text": "Deuteranopia", // (Red/Green - poor Green)",
+        "corrections": [
+            ColorCorrectionType.lmsDaltonization,
+            ColorCorrectionType.lab
+        ] 
+    },
+    {
+        "id": ColorblindnessType.protanopia, 
+        "text": "Protanopia", // (Red/Green - poor Red)",
+        "corrections": [
+            ColorCorrectionType.lmsDaltonization,
+            ColorCorrectionType.cbFilterService
+        ] 
+    },
+    { 
+        "id": ColorblindnessType.tritanopia, 
+        "text": "Tritanopia", // (Yellow/Blue)",
+        "corrections": [
+            ColorCorrectionType.lmsDaltonization,
+            ColorCorrectionType.shift
+        ]
+    }
+];
 
+const colorCorrectionTypes = [
+    { "id": ColorCorrectionType.lmsDaltonization, "text": "LMS Daltonization" },
+    { "id": ColorCorrectionType.cbFilterService, "text": "CBFS Method" },
+    { "id": ColorCorrectionType.lab, "text": "LAB Method" },
+    { "id": ColorCorrectionType.shift, "text": "Shifting Method" }
+];
 
-const myObj = [{"id":"Red/Green","text":"Red/Green"},{"id":"Yellow/Blue","text":"Yellow/Blue"}, {"id":"Mono","text":"Mono"}];
-
-const selectedIds = myObj.map(({ id }) => id);
-
-export default function CBSettings({config, fonts, onChange}: FontSettingsProps) {
+export default function CBSettings({config, fonts, onChange}: CbSettingsProps) {
     return (
         <section class="font-settings">
             <div class="font-settings__font-select-container">
                 <div class="font-settings__font-select-container__line">
                     <CheckBox
-                        checked={config.useFont}
-                        //onchange={(e) => onChange({useFont: e.target.checked})}
+                        checked={config.useColorCorrection}
+                        onchange={(e) => onChange({useColorCorrection: e.target.checked})}
                     />
                     <Select
-                        value={"Red/Green"}
-                        //onChange={(value) => onChange({fontFamily: value})}
-                        options={selectedIds}
+                        value={colorblindnessTypes.find(x => x.id == config.colorblindnessType).text}
+                        onChange={(value) => onChange({colorblindnessType: colorblindnessTypes.find(x => x.text == value).id})}
+                        options={colorblindnessTypes.map(x => x.text)}
                     />
-                    
                 </div>
                 <label class="font-settings__font-select-container__label">
-                    {getLocalMessage('select_type_of_cb')}
+                    {getLocalMessage('enable_cb')}
                 </label>
             </div>
             <UpDown
@@ -48,8 +77,29 @@ export default function CBSettings({config, fonts, onChange}: FontSettingsProps)
                 onChange={(value) => onChange({dummy_val: value})}
                 //onChange={(value) =>0}
             />
-            
+
+            <div style="display:flex; justify-content:center; width:97%; text-align:center;">
+                <div>
+                    <input class="jscolor jscolor-active" style="width:80px" value={config.unclickedColor} name="unclicked" onchange={(value) => onChange({unclickedColor: value.target.value})} />
+                    <label class="font-settings__font-select-container__label">
+                        {getLocalMessage('unvisited_link')}
+                    </label>
+                </div>
+                <CheckBox
+                    checked={config.linkColor}
+                    onchange={(e) => onChange({linkColor: e.target.checked})}
+                />
+                <div>
+                    <input class="jscolor jscolor-active" style="width:80px" value={config.clickedColor} name="clicked" onchange={(value) => onChange({clickedColor: value.target.value})}/>
+                    <label class="font-settings__font-select-container__label">
+                        {getLocalMessage('visited_link')}
+                    </label>
+                </div>
+            </div>
+            <script>window.jscolor.installByClassName("jscolor")</script> 
+
             <CustToggle
+
                 //class="site-list-settings__toggle"
                 checked={true}
                 labelOn={getLocalMessage('disable_color_hover')}
@@ -58,11 +108,13 @@ export default function CBSettings({config, fonts, onChange}: FontSettingsProps)
                 
             />
 
+
             <Button
                 onclick={() => hoverFun()}
             >
                 HOVER
             </Button>
+
 
         </section>
         
