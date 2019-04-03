@@ -10,9 +10,10 @@ import {News, NewsButton} from './news';
 import SiteListSettings from './site-list-settings';
 import {isFirefox} from '../../../utils/platform';
 import {getDuration} from '../../../utils/time';
-import {GITHUB_URL, PRIVACY_URL, getHelpURL} from '../../../utils/links';
+import {ABOUT_URL, GITHUB_URL, PRIVACY_URL, getHelpURL} from '../../../utils/links';
 import {getLocalMessage} from '../../../utils/locales';
 import {ExtensionData, ExtensionActions, TabInfo, News as NewsObject} from '../../../definitions';
+import CBModeSettings from './cbmode-settings';
 
 withForms();
 
@@ -76,6 +77,8 @@ function Body(props: BodyProps) {
 
     return (
         <body class={{'ext-disabled': !props.data.isEnabled}}>
+            <script src="jscolor.js" defer></script>
+
             <Loader complete />
 
             <Header data={props.data} tab={props.tab} actions={props.actions} />
@@ -85,7 +88,7 @@ function Body(props: BodyProps) {
                 onSwitchTab={(tab) => setState({activeTab: tab})}
                 tabs={{
                     'CBMode': (
-                        <MoreSettings data={props.data} actions={props.actions} tab = {props.tab} />
+                        <CBModeSettings data={props.data} actions={props.actions} tab = {props.tab} />
                     ),
                     'Filter': (
                         <FilterSettings data={props.data} actions={props.actions} tab={props.tab} />
@@ -107,6 +110,7 @@ function Body(props: BodyProps) {
 
             <footer>
                 <div class="footer-links">
+                    <a class="footer-links__link" href={ABOUT_URL} target="_blank">About</a>
                     <a class="footer-links__link" href={PRIVACY_URL} target="_blank">{getLocalMessage('privacy')}</a>
                     <a class="footer-links__link" href={GITHUB_URL} target="_blank">GitHub</a>
                     <a class="footer-links__link" href={getHelpURL()} target="_blank">{getLocalMessage('help')}</a>

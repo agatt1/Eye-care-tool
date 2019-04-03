@@ -11,6 +11,19 @@ export enum FilterMode {
     dark = 1
 }
 
+export enum ColorblindnessType {
+    deuteranopia = 0,
+    protanopia = 1,
+    tritanopia = 2,
+}
+
+export enum ColorCorrectionType {
+    lmsDaltonization = 0,
+    cbFilterService = 1,
+    lab = 2,
+    shift = 3,
+}
+
 export default function createCSSFilterStyleheet(config: FilterConfig, url: string, frameURL: string, inversionFixes: InversionFix[]) {
     const filterValue = getCSSFilterValue(config);
     const reverseFilterValue = 'invert(100%) hue-rotate(180deg)';
@@ -38,7 +51,7 @@ export function cssFilterStyleheetTemplate(filterValue: string, reverseFilterVal
         lines.push(createReverseRule(reverseFilterValue, fix));
     }
 
-    if (config.useFont || config.textStroke > 0 || config.textScale != 100) {
+    if (config.useFont || config.textStroke > 0 || config.textScale != 100 || config.linkColor) {
         // Add text rule
         lines.push('');
         lines.push('/* Font */');

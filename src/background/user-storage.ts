@@ -2,6 +2,7 @@ import {isMacOS, isWindows} from '../utils/platform';
 import ThemeEngines from '../generators/theme-engines';
 import {isURLMatched} from '../utils/url';
 import {UserSettings} from '../definitions';
+import { ColorblindnessType, ColorCorrectionType } from 'generators/css-filter';
 
 const SAVE_TIMEOUT = 1000;
 
@@ -21,8 +22,15 @@ export default class UserStorage {
                 fontFamily: isMacOS() ? 'Helvetica Neue' : isWindows() ? 'Segoe UI' : 'Open Sans',
                 textStroke: 0,
                 textScale: 100,
+                useColorCorrection: false,
+                colorblindnessType: ColorblindnessType.deuteranopia,
+                colorCorrectionType: ColorCorrectionType.lmsDaltonization,
+                linkColor: false,
+                unclickedColor: '0000EE',
+                clickedColor: '551A8B',
                 engine: ThemeEngines.dynamicTheme,
                 stylesheet: '',
+                dummy_val: 0,
             },
             customThemes: [],
             siteList: [],
@@ -137,8 +145,15 @@ export default class UserStorage {
                 fontFamily: f.fontFamily,
                 textStroke: f.textStroke,
                 textScale: f.textScale,
+                useColorCorrection: f.useColorCorrection,
+                colorblindnessType: f.colorblindnessType,
+                colorCorrectionType: f.colorCorrectionType,
+                linkColor: f.linkColor,
+                unclickedColor: f.unclickedColor,
+                clickedColor: f.clickedColor,
                 engine: f.engine,
                 stylesheet: f.stylesheet,
+                dummy_val: f.dummy_val,
             };
         }
 
