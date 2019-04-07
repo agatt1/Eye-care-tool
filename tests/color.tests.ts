@@ -1,4 +1,5 @@
 import {parse, hslToRGB, rgbToHSL, rgbToString, rgbToHexString, hslToString, HSLA} from '../src/utils/color';
+import { Matrix, applyColorMatrix } from '../src/generators/utils/matrix';
 
 test('Color parsing', () => {
     expect(parse('rgb(255,0,153)')).toEqual({r: 255, g: 0, b: 153, a: 1});
@@ -93,3 +94,38 @@ test('Color conversion', () => {
     expect(round(rgbToHSL({r: 11, g: 34, b: 40}))).toEqual({h: 192, s: 0.57, l: 0.10, a: 1});
     expect(round(rgbToHSL({r: 161, g: 28, b: 61}))).toEqual({h: 345, s: 0.7, l: 0.37, a: 1});
 });
+
+test('Colorblindness correction', () => {
+    var deuteranopiaMatrix = Matrix.fullCorrectionDeuteranopia(1.0);
+    expect(applyColorMatrix([206, 121, 117], deuteranopiaMatrix)).toEqual([249, 121, 101]);
+    expect(applyColorMatrix([255, 178, 124], deuteranopiaMatrix)).toEqual([255, 178, 110]);
+    expect(applyColorMatrix([255, 250, 141], deuteranopiaMatrix)).toEqual([255, 250, 140]);
+    expect(applyColorMatrix([184, 208, 120], deuteranopiaMatrix)).toEqual([172, 208, 124]);
+    expect(applyColorMatrix([140, 215, 159], deuteranopiaMatrix)).toEqual([102, 215, 173]);
+    expect(applyColorMatrix([132, 211, 219], deuteranopiaMatrix)).toEqual([92, 211, 233]);
+    expect(applyColorMatrix([211, 190, 231], deuteranopiaMatrix)).toEqual([222, 190, 227]);
+    expect(applyColorMatrix([237, 182, 220], deuteranopiaMatrix)).toEqual([255, 182, 210]);
+    expect(applyColorMatrix([255, 175, 204], deuteranopiaMatrix)).toEqual([255, 175, 189]);
+
+    var protanopiaMatrix = Matrix.fullCorrectionProtanopia(1.0);
+    expect(applyColorMatrix([206, 121, 117], protanopiaMatrix)).toEqual([206, 164, 169]);
+    expect(applyColorMatrix([255, 178, 124], protanopiaMatrix)).toEqual([255, 217, 172]);
+    expect(applyColorMatrix([255, 250, 141], protanopiaMatrix)).toEqual([255, 253, 144]);
+    expect(applyColorMatrix([184, 208, 120], protanopiaMatrix)).toEqual([184, 196, 105]);
+    expect(applyColorMatrix([140, 215, 159], protanopiaMatrix)).toEqual([140, 177, 113]);
+    expect(applyColorMatrix([132, 211, 219], protanopiaMatrix)).toEqual([132, 171, 170]);
+    expect(applyColorMatrix([211, 190, 231], protanopiaMatrix)).toEqual([211, 201, 244]);
+    expect(applyColorMatrix([237, 182, 220], protanopiaMatrix)).toEqual([237, 210, 254]);
+    expect(applyColorMatrix([255, 175, 204], protanopiaMatrix)).toEqual([255, 216, 253]);
+
+    var tritanopiaMatrix = Matrix.fullCorrectionTritanopia(1.0);
+    expect(applyColorMatrix([206, 121, 117], tritanopiaMatrix)).toEqual([255, 255, 117]);
+    expect(applyColorMatrix([255, 178, 124], tritanopiaMatrix)).toEqual([255, 255, 124]);
+    expect(applyColorMatrix([255, 250, 141], tritanopiaMatrix)).toEqual([255, 255, 141]);
+    expect(applyColorMatrix([184, 208, 120], tritanopiaMatrix)).toEqual([121, 169, 120]);
+    expect(applyColorMatrix([140, 215, 159], tritanopiaMatrix)).toEqual([0, 94, 159]);
+    expect(applyColorMatrix([132, 211, 219], tritanopiaMatrix)).toEqual([0, 83, 219]);
+    expect(applyColorMatrix([211, 190, 231], tritanopiaMatrix)).toEqual([255, 224, 231]);
+    expect(applyColorMatrix([237, 182, 220], tritanopiaMatrix)).toEqual([255, 255, 220]);
+    expect(applyColorMatrix([255, 175, 204], tritanopiaMatrix)).toEqual([255, 255, 204]);
+})
