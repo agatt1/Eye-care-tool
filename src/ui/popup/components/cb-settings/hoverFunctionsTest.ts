@@ -55,6 +55,14 @@ export function rgbToColor(rgbArray){
     var white = [255, 255, 255];
     var gray = [128, 128, 128];
     var black = [0, 0, 0];
+    var light_pink = [255, 182, 193];
+    var hot_pink = [255, 105, 180];
+    var deep_pink = [255, 20, 147];
+    var pale_violet_red = [219, 112, 147];
+    var medium_violet_red = [199, 21, 133];
+    var dark_red = [139, 0, 0];
+
+
     colorArray.push(red);
     colorArray.push(green);
     colorArray.push(blue);
@@ -68,6 +76,12 @@ export function rgbToColor(rgbArray){
     colorArray.push(white);
     colorArray.push(gray);
     colorArray.push(black);
+    colorArray.push(light_pink);
+    colorArray.push(hot_pink);
+    colorArray.push(deep_pink);
+    colorArray.push(pale_violet_red);
+    colorArray.push(medium_violet_red);
+    colorArray.push(dark_red);
     //console.log(colorArray[0][1]);
 
     for(var i = 0; i < colorArray.length; i++){
@@ -121,6 +135,21 @@ export function rgbToColor(rgbArray){
             break;
         case 12:
             rgb_final_color = "black";
+            break;
+        case 13:
+            rgb_final_color = "light pink";
+            break;
+        case 14:
+            rgb_final_color = "pink";
+            break;
+        case 15:
+            rgb_final_color = "dark pink";
+            break;
+        case 16:
+            rgb_final_color = "light pink";
+            break;
+        case 17:
+            rgb_final_color = "dark pink";
             break;
     
         default:
