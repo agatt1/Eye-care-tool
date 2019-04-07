@@ -1,0 +1,161 @@
+{
+    "extension_description": {
+        "message": "Dark theme for every website. Care your eyes, use Dark Reader for night and daily browsing."
+    },
+    "loading_please_wait": {
+        "message": "Loading, please wait"
+    },
+    "on": {
+        "message": "On"
+    },
+    "off": {
+        "message": "Off"
+    },
+    "toggle": {
+        "message": "Toggle"
+    },
+    "toggle_current_site": {
+        "message": "Toggle current site"
+    },
+    "setup_hotkey_toggle_site": {
+        "message": "Setup current site\ntoggle hotkey"
+    },
+    "toggle_extension": {
+        "message": "Toggle extension"
+    },
+    "setup_hotkey_toggle_extension": {
+        "message": "Setup extension\ntoggle hotkey"
+    },
+    "page_protected": {
+        "message": "This page is protected\nby browser"
+    },
+    "page_in_dark_list": {
+        "message": "This site is in global\nDark List"
+    },
+    "filter": {
+        "message": "Filter"
+    },
+    "cbmode": {
+        "message": "Colors"
+    },
+    "mode": {
+        "message": "Mode"
+    },
+    "dark": {
+        "message": "Dark"
+    },
+    "light": {
+        "message": "Light"
+    },
+    "brightness": {
+        "message": "Brightness"
+    },
+    "contrast": {
+        "message": "Contrast"
+    },
+    "grayscale": {
+        "message": "Grayscale"
+    },
+    "sepia": {
+        "message": "Sepia"
+    },
+    "only_for": {
+        "message": "Only for"
+    },
+    "only_for_description": {
+        "message": "Apply settings to current website only"
+    },
+    "site_list": {
+        "message": "Site list"
+    },
+    "invert_listed_only": {
+        "message": "Invert listed only"
+    },
+    "not_invert_listed": {
+        "message": "Not invert listed"
+    },
+    "add_site_to_list": {
+        "message": "Add site to list"
+    },
+    "setup_add_site_hotkey": {
+        "message": "Setup a hotkey for adding site"
+    },
+    "more": {
+        "message": "More"
+    },
+    "select_font": {
+        "message": "Select a font"
+    },
+    "text_stroke": {
+        "message": "Text stroke"
+    },
+    "text_scale": {
+        "message": "Text scale"
+    },
+    "try_experimental_theme_engines": {
+        "message": ""
+    },
+    "engine_filter": {
+        "message": "Filter"
+    },
+    "engine_filter_plus": {
+        "message": "Filter+"
+    },
+    "engine_static": {
+        "message": "Static"
+    },
+    "engine_dynamic": {
+        "message": "Dynamic"
+    },
+    "theme_generation_mode": {
+        "message": "Theme generation mode"
+    },
+    "custom_browser_theme_on": {
+        "message": "Custom"
+    },
+    "custom_browser_theme_off": {
+        "message": "Default"
+    },
+    "change_browser_theme": {
+        "message": "Change the browser theme"
+    },
+    "sensitivity": {
+        "message": "Sensitivity"
+    },
+    "enable_cb": {
+        "message": "Adjust colors for colorblindness"
+    },
+    "enable_color_hover": {
+        "message": "Enable hover"
+    },
+    "disable_color_hover": {
+        "message": "Disable hover"
+    },
+    "unvisited_link": {
+        "message": "Unvisited Links"
+    },
+    "visited_link": {
+        "message": "Visited Links"
+    },
+    "privacy": {
+        "message": "Privacy"
+    },
+    "help": {
+        "message": "Help"
+    },
+    "donate": {
+        "message": "Donate"
+    },
+    "news": {
+        "message": "News"
+    },
+    "read_more": {
+        "message": "Read more"
+    },
+    "open_dev_tools": {
+        "message": "Dev tools"
+    },
+    "store_listing": {
+        "message": "This extension enhances Dark Reader by providing tools to help people who are visually impaired. \n\nYou can adjust brightness, contrast, sepia filter, dark mode, font settings and ignore-list.\n\nIllumify doesn't show ads and doesn't send user's data anywhere. It is fully open-source https://github.com/darkreader/darkreader\n\nBefore you install disable similar extensions. Enjoy!"
+    }
+}

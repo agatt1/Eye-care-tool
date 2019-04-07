@@ -1,0 +1,161 @@
+{
+    "extension_description": {
+        "message": "すべてのウェブサイトにダークテーマを適用します。夜間や毎日のブラウジングにDark Readerを使用し、あなたの目を気遣います。"
+    },
+    "loading_please_wait": {
+        "message": "読み込み中…しばらくお待ちください"
+    },
+    "on": {
+        "message": "オン"
+    },
+    "off": {
+        "message": "オフ"
+    },
+    "toggle": {
+        "message": "切り替え"
+    },
+    "toggle_current_site": {
+        "message": "現在のサイトを切り替える"
+    },
+    "setup_hotkey_toggle_site": {
+        "message": "現在のサイトトグル\nホットキーを設定する"
+    },
+    "toggle_extension": {
+        "message": "拡張機能の切り替え"
+    },
+    "setup_hotkey_toggle_extension": {
+        "message": "セットアップ拡張\nトグルホットキー"
+    },
+    "page_protected": {
+        "message": "このページはブラウザに\nよって保護されています"
+    },
+    "page_in_dark_list": {
+        "message": "このサイトはグローバル\nダークリストにあります"
+    },
+    "filter": {
+        "message": "フィルタ"
+    },
+    "cbmode": {
+        "message": "色"
+    },
+    "mode": {
+        "message": "モード"
+    },
+    "dark": {
+        "message": "ダーク"
+    },
+    "light": {
+        "message": "ライト"
+    },
+    "brightness": {
+        "message": "輝度"
+    },
+    "contrast": {
+        "message": "コントラスト"
+    },
+    "grayscale": {
+        "message": "グレースケール"
+    },
+    "sepia": {
+        "message": "セピア"
+    },
+    "only_for": {
+        "message": "このサイトでのみ適用"
+    },
+    "only_for_description": {
+        "message": "現在のウェブサイトのみに設定を適用する"
+    },
+    "site_list": {
+        "message": "サイトリスト"
+    },
+    "invert_listed_only": {
+        "message": "ホワイトリスト"
+    },
+    "not_invert_listed": {
+        "message": "ブラックリスト"
+    },
+    "add_site_to_list": {
+        "message": "サイトをリストに追加する"
+    },
+    "setup_add_site_hotkey": {
+        "message": "サイトを追加するためのホットキーを設定する"
+    },
+    "more": {
+        "message": "その他"
+    },
+    "select_font": {
+        "message": "フォントを選択"
+    },
+    "text_stroke": {
+        "message": "テキストストローク"
+    },
+    "text_scale": {
+        "message": "Text scale"
+    },
+    "try_experimental_theme_engines": {
+        "message": ""
+    },
+    "engine_filter": {
+        "message": "フィルタ"
+    },
+    "engine_filter_plus": {
+        "message": "フィルタ+"
+    },
+    "engine_static": {
+        "message": "静的"
+    },
+    "engine_dynamic": {
+        "message": "動的"
+    },
+    "theme_generation_mode": {
+        "message": "テーマ生成モード"
+    },
+    "custom_browser_theme_on": {
+        "message": "カスタム"
+    },
+    "custom_browser_theme_off": {
+        "message": "デフォルト"
+    },
+    "change_browser_theme": {
+        "message": "ブラウザのテーマを変更する"
+    },
+    "sensitivity": {
+        "message": "感度"
+    },
+    "select_type_of_cb": {
+        "message": "色覚異常のタイプを選択"
+    },
+    "enable_color_hover": {
+        "message": "ホバーを有効にする"
+    },
+    "disable_color_hover": {
+        "message": "ホバーを無効にする"
+    },
+    "unvisited_link": {
+        "message": "未訪問リンク"
+    },
+    "visited_link": {
+        "message": "訪問したリンク"
+    },
+    "privacy": {
+        "message": "個人情報"
+    },
+    "help": {
+        "message": "ヘルプ"
+    },
+    "donate": {
+        "message": "寄付する"
+    },
+    "news": {
+        "message": "ニュース"
+    },
+    "read_more": {
+        "message": "続きを読む"
+    },
+    "open_dev_tools": {
+        "message": "開発者ツール"
+    },
+    "store_listing": {
+        "message": "このアイ・ケアの拡張機能は、オンザフライでウェブサイトのためのダークテーマを作成し、ナイトモードを有効にします。 Dark Readerは鮮やかな色を反転させてコントラストを高め、夜間に読みやすくします。\n\n明るさ、コントラスト、セピアフィルター、ダークモード、フォント設定、無視リストを調整することができます。\n\nDark Readerは広告を表示せず、ユーザーのデータをどこにも送信しません。 それは完全にオープンソースです https://github.com/darkreader/darkreader\n\nインストールする前に、同様の拡張機能を無効にしてください。 ブラウジングをお楽しみください！"
+    }
+}

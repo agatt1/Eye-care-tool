@@ -1,0 +1,161 @@
+{
+    "extension_description": {
+        "message": "모든 웹 사이트의 검은 색 테마. 눈을 보호하고 야간 및 주간 탐색을 위해 Dark Reader 을 사용하십시오."
+    },
+    "loading_please_wait": {
+        "message": "로드하는 동안 기다려주십시오. 잠시 기다려주십시오."
+    },
+    "on": {
+        "message": "열기"
+    },
+    "off": {
+        "message": "닫기"
+    },
+    "toggle": {
+        "message": "스위치"
+    },
+    "toggle_current_site": {
+        "message": "현재 웹 사이트 전환"
+    },
+    "setup_hotkey_toggle_site": {
+        "message": "현재 웹 사이트 설정\n단축키 전환"
+    },
+    "toggle_extension": {
+        "message": "스위치 확장"
+    },
+    "setup_hotkey_toggle_extension": {
+        "message": "확장 기능 설정하기\n바로 가기 전환"
+    },
+    "page_protected": {
+        "message": "이 페이지는\n브라우저 보호"
+    },
+    "page_in_dark_list": {
+        "message": "이 사이트는 전세계 어둠\n목록에 있습니다"
+    },
+    "filter": {
+        "message": "필터"
+    },
+    "cbmode": {
+        "message": "Colors"
+    },
+    "mode": {
+        "message": "모드"
+    },
+    "dark": {
+        "message": "어둠"
+    },
+    "light": {
+        "message": "밝은"
+    },
+    "brightness": {
+        "message": "밝기"
+    },
+    "contrast": {
+        "message": "대비"
+    },
+    "grayscale": {
+        "message": "그레이 스케일"
+    },
+    "sepia": {
+        "message": "세피아 필터"
+    },
+    "only_for": {
+        "message": "해당 대상에만"
+    },
+    "only_for_description": {
+        "message": "현재 웹 사이트에만 설정 적용"
+    },
+    "site_list": {
+        "message": "사이트 목록"
+    },
+    "invert_listed_only": {
+        "message": "반전 된 목록"
+    },
+    "not_invert_listed": {
+        "message": "반전 된 색상 없음"
+    },
+    "add_site_to_list": {
+        "message": "목록에 웹 사이트 추가"
+    },
+    "setup_add_site_hotkey": {
+        "message": "웹 사이트를 추가하는 단축키 설정"
+    },
+    "more": {
+        "message": "기타"
+    },
+    "select_font": {
+        "message": "글꼴 선택"
+    },
+    "text_stroke": {
+        "message": "텍스트 획"
+    },
+    "text_scale": {
+        "message": "Text scale"
+    },
+    "try_experimental_theme_engines": {
+        "message": ""
+    },
+    "engine_filter": {
+        "message": "필터"
+    },
+    "engine_filter_plus": {
+        "message": "필터+"
+    },
+    "engine_static": {
+        "message": "정적"
+    },
+    "engine_dynamic": {
+        "message": "동적"
+    },
+    "theme_generation_mode": {
+        "message": "테마 생성 모드"
+    },
+    "custom_browser_theme_on": {
+        "message": "맞춤"
+    },
+    "custom_browser_theme_off": {
+        "message": "기본값"
+    },
+    "change_browser_theme": {
+        "message": "브라우저 테마 변경"
+    },
+    "sensitivity": {
+        "message": "감광도"
+    },
+    "select_type_of_cb": {
+        "message": "색맹 유형 선택"
+    },
+    "enable_color_hover": {
+        "message": "마우스 오버 사용"
+    },
+    "disable_color_hover": {
+        "message": "마우스 오버 사용 안함"
+    },
+    "unvisited_link": {
+        "message": "방문하지 않은 링크"
+    },
+    "visited_link": {
+        "message": "방문한 링크"
+    },
+    "privacy": {
+        "message": "개인 정보"
+    },
+    "help": {
+        "message": "도움말"
+    },
+    "donate": {
+        "message": "기부"
+    },
+    "news": {
+        "message": "뉴스"
+    },
+    "read_more": {
+        "message": "더 것을 읽으십시오"
+    },
+    "open_dev_tools": {
+        "message": "개발자 도구"
+    },
+    "store_listing": {
+        "message": "이것은 검은 색 테마를 실시간으로 생성하여 각 웹 사이트에 대한 야간 모드를 가능하게하는 눈의 연장입니다. Dark Reader 은 밝은 색상을 뒤집어 야 웹 콘텐트를 대비가 높고 밤에 읽기 쉽도록 만듭니다.\n\n밝기, 대비를 조정하고, 세피아 필터를 적용하고, 어두운 모드를 설정하고, 글꼴을 설정하고 웹 사이트 목록을 무시할 수 있습니다.\n\nDark Reader 는 광고가없고 사용자 데이터를 어디에도 보내지 않습니다. 그것은 완전히 오픈 소스입니다 https://github.com/darkreader/darkreader\n\n설치하기 전에 유사한 확장 프로그램을 비활성화하십시오. 서핑을 즐기십시오!"
+    }
+}
