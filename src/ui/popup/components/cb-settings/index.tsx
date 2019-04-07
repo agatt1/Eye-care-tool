@@ -85,7 +85,6 @@ export default function CBSettings({config, fonts, onChange}: CbSettingsProps) {
                 />
             </div>
 
-
             <div style="display:flex; justify-content:center; width:97%; text-align:center;">
                 <div>
                     <input class="jscolor jscolor-active" style="width:80px" value={config.unclickedColor} name="unclicked" onchange={(value) => onChange({unclickedColor: value.target.value})} />
