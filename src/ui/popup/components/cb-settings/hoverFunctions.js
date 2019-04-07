@@ -1,3 +1,76 @@
+/*this version of hoverFunction captures an image every 0.5 seconds
+Things checked:
+*/
+export function hoverFunVer3(){
+    //this function injects the html on the webpage (only runs once)
+    function initialInject(){
+        chrome.tabs.executeScript({
+            code: '(' + function(){
+                var ColorHoverThing = document.createElement('div');
+                ColorHoverThing.textContent = "Color";
+                ColorHoverThing.id = "hoverColorDiv"
+                ColorHoverThing.setAttribute("style", "position: absolute; left: 500px; top: 30px; font-size: 50px; color: red");
+                var root = document.documentElement;
+                root.prepend(ColorHoverThing);
+                console.log("html element created");
+               return {success: true};
+            } + ')(' + ');'
+        }, function(results){
+    
+        });
+    }
+    //this function runs every 0.5 seconds, it first captures a tab, then it analyzes color
+    function getColorLoop(){
+        function captureTab(){
+            //capture the visible tab, then send a message with the dataUrl (url to make image)
+            chrome.tabs.captureVisibleTab(null, {format: "png"}, function(dataUrl){
+                chrome.runtime.sendMessage({'dataUrlMessage': dataUrl});
+                console.log("dataUrl sent");
+            })
+        }
+        //listen for message
+        //console.log("exit visibleTab");
+        function createImage(){
+            chrome.runtime.onMessage.addListener(function(myMessage, sender, sendResponse){
+                console.log("entered listener");
+                if('dataUrlMessage' in myMessage){
+                    console.log("message received");
+                    //if message is correctly sent, create new image
+                    var dataUrl = dataUrlMessage;
+                    var new_img = new Image();
+                    new_img.src = dataUrl;
+                    console.log("Image Created");
+                }
+                else
+                    console.log("message was not received");
+            })
+            console.log("end of createImage function");
+        }
+        createImage();
+        captureTab();
+        //createImage();    
+        console.log("end of function");
+
+    } 
+
+    initialInject();
+    setInterval(getColorLoop,1000);
+
+    /*ignore this crap
+    var img_dataUrl = "incorrect message";
+        chrome.tabs.captureVisibleTab(null, {format: "png"}, function(dataUrl){
+            img_dataUrl = dataUrl;
+            return img_dataUrl;
+            //console.log(img_dataUrl);
+        })
+        if(img_dataUrl != "incorrect message")
+            console.log("actually worked");
+        else
+            console.log("failed");
+    */
+}
+
+
 //this version of hoverFunction uses chrome's capturevisibleTab method to obtain an image
 /*
 Things Checked:
@@ -13,7 +86,7 @@ Things Checked:
     regular height and width. I did this, but the exception was still being thrown. I have surrounded the 
     onmousemove statements in a try catch block to deal with these exceptions.
 */
-export function hoverFun(){
+export function hoverFunVer2(){
     
     function getColor(){
         chrome.tabs.captureVisibleTab(null, {format: "png"}, function(dataUrl){
@@ -335,7 +408,7 @@ Problems:
 3. The x,y values I input into getting the pixel data are incorrect. They are not the x,y values of the image,
 they are the x,y values of the window. This should be corrected with chrome's captureVisibleTab
 */
-export function hoverFunOld(){
+export function hoverFunVer1(){
 
     var a = "nice meme";
 
