@@ -91,6 +91,7 @@ export function rgbToColor(rgbArray){
         }
          
     }
+
             //NAMED COLOR                       //ACTUAL COLOR
     switch (rgbArrayMinIndex) {
         case 0:
@@ -201,6 +202,7 @@ export function rgbToColor(rgbArray){
         case 35:
             rgb_final_color = "dark brown"      //maroon
             break;
+
         default:
             break;
     }

@@ -254,7 +254,7 @@ export function hoverFunVer2(){
                         colorArray.push([255,140,0]);       //dark orange
                         colorArray.push([255,255,224]);     //light yellow
                         colorArray.push([255,215,0]);       //gold
-                        colorArray.push([128,0,0]);         //maroon
+                        colorArray.push([128,0,0]);         //maro
 
                         for(i = 0; i < colorArray.length; i++){
                             
@@ -267,6 +267,7 @@ export function hoverFunVer2(){
                             }
                              
                         }
+                      
                                 //NAMED COLOR                       //ACTUAL COLOR
                         switch (rgbArrayMinIndex) {
                             case 0:
@@ -377,6 +378,7 @@ export function hoverFunVer2(){
                             case 35:
                                 rgb_final_color = "dark brown"      //maroon
                                 break;
+
                             default:
                                 break;
                         }
@@ -405,6 +407,7 @@ export function hoverFunVer2(){
                                 console.log(hsvArray[0], hsvArray[1], hsvArray[2]);
                                 console.log(rgbArray[0], rgbArray[1], rgbArray[2]);
                                 console.log(final_color);
+
                                 //html stuff
                                 ColorHoverThing.textContent = final_color;
                                 //console.log(hsvArray[0]);    
