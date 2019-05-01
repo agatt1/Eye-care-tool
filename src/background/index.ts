@@ -1,5 +1,6 @@
 import {Extension} from './extension';
 import {getHelpURL} from '../utils/links';
+import CustomSettingsToggle from 'ui/popup/components/custom-settings-toggle';
 
 // Initialize extension
 const extension = new Extension();
@@ -9,6 +10,17 @@ chrome.runtime.onInstalled.addListener(({reason}) => {
     if (reason === 'install') {
         //chrome.tabs.create({url: getHelpURL()});
     }
+});
+
+// Set up hover function event listener
+chrome.runtime.onMessage.addListener(
+    function(myMessage, sender, sendResponse){
+        if(myMessage.message == "User has scrolled"){
+            chrome.tabs.captureVisibleTab(null, {format: "png"}, function(dataUrl){
+                sendResponse({newURL: dataUrl});
+            });
+        }
+        return true;
 });
 
 declare const __DEBUG__: boolean;
