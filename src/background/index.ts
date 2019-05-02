@@ -1,6 +1,5 @@
 import {Extension} from './extension';
 import {getHelpURL} from '../utils/links';
-import CustomSettingsToggle from 'ui/popup/components/custom-settings-toggle';
 
 // Initialize extension
 const extension = new Extension();
