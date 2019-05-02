@@ -24,14 +24,21 @@ export function hoverFunVer2(){
                 function(tabId, windowId) {
                     var dataUrl = null;
 
+                    var latestRequestId = -1;
+                    var latestFinishedRequestId = -1;
                     function captureVisibleTab(callback) {
+                        var thisRequestId = ++latestRequestId;
+
                         chrome.runtime.sendMessage({
                             message: "Capture visible tab", 
                             tabId: tabId, 
                             windowId: windowId
                         }, function(response) {
                             if (response.message == "Captured visible tab") {
-                                dataUrl = response.dataUrl;
+                                if (thisRequestId > latestFinishedRequestId) { 
+                                    latestFinishedRequestId = thisRequestId; // TODO: fix race condition with if statement, and dataUrl update
+                                    dataUrl = response.dataUrl; 
+                                }
                                 callback();
                             }
                         });
@@ -384,6 +391,7 @@ export function hoverFunVer2(){
                     window.addEventListener("scroll", function(e) { 
                         indicatorLoadingImage.style = "display: block";
                         numberOfActiveScrollEvents++;
+                        
                         captureVisibleTab(function() { 
                             updateDisplayedColor();
                             numberOfActiveScrollEvents--; // TODO: fix race condition with if statement
