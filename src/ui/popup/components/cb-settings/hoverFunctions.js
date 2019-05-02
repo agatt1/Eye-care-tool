@@ -14,14 +14,31 @@ Things Checked:
     onmousemove statements in a try catch block to deal with these exceptions.
 */
 export function hoverFunVer2(){
-    
-    function getColor(){
-        chrome.tabs.captureVisibleTab(null, {format: "png"}, function(dataUrl){
-            var dataToWebPage = dataUrl;
-            chrome.tabs.executeScript({
-                code: '(' + function(params){
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        var currentTab = tabs[0];
+
+        var scriptInputs = [currentTab.id, currentTab.windowId];
+
+        chrome.tabs.executeScript(currentTab.id, {
+            code: '(' + 
+                function(tabId, windowId) {
+                    var dataUrl = null;
+
+                    function captureVisibleTab(callback) {
+                        chrome.runtime.sendMessage({
+                            message: "Capture visible tab", 
+                            tabId: tabId, 
+                            windowId: windowId
+                        }, function(response) {
+                            if (response.message == "Captured visible tab") {
+                                dataUrl = response.dataUrl;
+                                callback();
+                            }
+                        });
+                    }
+                    captureVisibleTab(function() { });
+
                     //all javascript here is executed by browser, not extension
-                    
                     function round(value, decimals){
                         return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
                     }
@@ -42,16 +59,22 @@ export function hoverFunVer2(){
                     //prepares the canvas, returns image data of the entire image (browser window)
                     function prepareCanvas(){
                         var final_img = new Image();
-                        final_img.src = params;
-                        var canvas = document.createElement('canvas');
-                        canvas.width = final_img.width;
-                        canvas.height = final_img.height;
-                        //canvas.width = final_img.naturalWidth;
-                        //canvas.height = final_img.naturalHeight;
-                        var context = canvas.getContext("2d");
-                        context.drawImage(final_img,0,0,canvas.width,canvas.height);
-                        var idt = context.getImageData(0, 0, canvas.width, canvas.height);
-                        return idt;
+                        final_img.src = dataUrl;
+
+                        if (final_img.width > 0 && final_img.height > 0) {
+                            var canvas = document.createElement('canvas');
+                            canvas.width = final_img.width;
+                            canvas.height = final_img.height;
+                            var context = canvas.getContext("2d");
+                            context.drawImage(final_img,0,0,canvas.width,canvas.height);
+                            var idt = context.getImageData(0, 0, canvas.width, canvas.height);
+                            return {image_data: idt, width: canvas.width, height: canvas.height};
+                        } else {
+                            return null;
+                        }
+                    }
+                    function getViewportDimensions() {
+                        return {width: window.innerWidth, height: window.innerHeight};
                     }
                     //convert rgb values to hsv values
                     function rgbtoHSV(rgbArray){
@@ -186,15 +209,15 @@ export function hoverFunVer2(){
                         for(i = 0; i < colorArray.length; i++){
                             
                             var rgbDistance = Math.abs(r1 - colorArray[i][0]) + 
-                                              Math.abs(b1 - colorArray[i][1]) + 
-                                              Math.abs(g1 - colorArray[i][2]);
+                                            Math.abs(b1 - colorArray[i][1]) + 
+                                            Math.abs(g1 - colorArray[i][2]);
                             if(rgbDistance < tempMinDistance){
                                 rgbArrayMinIndex = i;
                                 tempMinDistance = rgbDistance;
                             }
-                             
+                            
                         }
-                      
+
                                 //NAMED COLOR                       //ACTUAL COLOR
                         switch (rgbArrayMinIndex) {
                             case 0:
@@ -313,57 +336,64 @@ export function hoverFunVer2(){
                         return rgb_final_color;
                     }
 
-                    var ColorHoverThing = document.createElement('div');
-                    ColorHoverThing.textContent = "Color";
-                    ColorHoverThing.id = "hoverColorDiv"
-                    ColorHoverThing.setAttribute("style", "position: fixed; left: 200px; top: 30px; font-size: 30px; color: black; z-index: 99; background-color: white; border: 2px solid black");
-                    var root = document.documentElement;
-                    root.prepend(ColorHoverThing);
-                    
-                    
+                    var indicatorDiv = document.createElement('div');
+                    indicatorDiv.style = "position: fixed; left: 200px; top: 30px; z-index: 9999; background-color: white; border: 2px solid black; display: flex; flex-direction: row; align-items: center";
 
-                        var mouseMoveFun = function(e){
-                            try {
-                                var mousecoords = getMousePos(e);
-                                var image_data = prepareCanvas();
-                                var rgbArray = getPixelXY(image_data,mousecoords.x,mousecoords.y);
+                    var indicatorText = document.createElement('div');
+                    indicatorText.textContent = "Color";
+                    indicatorText.style = "font-size: 30px; color: black;";
+                    indicatorDiv.appendChild(indicatorText);
+
+                    var indicatorLoadingImage = document.createElement("img");
+                    indicatorLoadingImage.src = "https://i.imgur.com/kfk1nBZ.gif";
+                    indicatorLoadingImage.alt = "(loading)";
+                    indicatorLoadingImage.style = "display: none";
+                    indicatorLoadingImage.id = "hoverColorLoading"
+                    indicatorDiv.appendChild(indicatorLoadingImage);
+
+                    var root = document.documentElement;
+                    root.prepend(indicatorDiv);
+
+                    var mouseCoords = null;
+
+                    function updateDisplayedColor() {
+                        if (dataUrl != null && mouseCoords != null) {
+                            var canvas = prepareCanvas();
+                            if (canvas != null) {
+                                var viewport = getViewportDimensions();
+                                var adjustedMouseCoords = {
+                                    x: Math.round(mouseCoords.x * (canvas.width / viewport.width)),
+                                    y: Math.round(mouseCoords.y * (canvas.height / viewport.height))
+                                };
+                                var rgbArray = getPixelXY(canvas.image_data, adjustedMouseCoords.x, adjustedMouseCoords.y);
                                 var hsvArray = rgbtoHSV(rgbArray);
                                 var final_color = HSVtoColor(hsvArray);
-                                //var final_color = rgbToColor(rgbArray);
-                                //console.log(rgbArray);
-                                // console.log(hsvArray[0], hsvArray[1], hsvArray[2]);
-                                // console.log(rgbArray[0], rgbArray[1], rgbArray[2]);
-                                // console.log(final_color);
-
-                                //html stuff
-                                ColorHoverThing.textContent = final_color;
-                                //console.log(hsvArray[0]);    
-                            } catch (error) {
-                                console.log("DOMException - source width is 0");
+    
+                                indicatorText.textContent = final_color;
                             }
-                            
-                            //console.log(mousecoords.x, mousecoords.y);
-                            //console.log(final_img.width, final_img.height);
+                        }
+                    }
+
+                    var mouseMoveFun = function(e){
+                        mouseCoords = getMousePos(e);
+                        updateDisplayedColor();
                     }
                     document.addEventListener("mousemove", mouseMoveFun);
 
-                    
-                    var scrollFunction = function(e){
-                        chrome.runtime.sendMessage({message: "User has scrolled"}, function(response) {
-                            params = response.newURL;
+                    var numberOfActiveScrollEvents = 0; 
+                    window.addEventListener("scroll", function(e) { 
+                        indicatorLoadingImage.style = "display: block";
+                        numberOfActiveScrollEvents++;
+                        captureVisibleTab(function() { 
+                            updateDisplayedColor();
+                            numberOfActiveScrollEvents--; // TODO: fix race condition with if statement
+                            if (numberOfActiveScrollEvents == 0) { 
+                                indicatorLoadingImage.style = "display: none";
+                            }
                         });
-                    }
-                    window.addEventListener("scroll", scrollFunction);
+                    });
 
-                   
-        
-                   return {success: true};
-                } + ')('+ JSON.stringify(dataToWebPage) + ');'
-            }, function(results){
-            });
-        });
-    }
-
-    getColor();
-    
+                } + ')(' + scriptInputs.join(", ") + ');'
+        }, function() { });
+    });
 }
