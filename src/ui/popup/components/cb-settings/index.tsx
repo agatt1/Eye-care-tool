@@ -41,12 +41,12 @@ const colorblindnessTypes = [
     }
 ];
 
-const colorCorrectionTypes = [
+     const colorCorrectionTypes = [
     { "id": ColorCorrectionType.lmsDaltonization, "text": "LMS Daltonization" },
     { "id": ColorCorrectionType.cbFilterService, "text": "CBFS Method" },
     { "id": ColorCorrectionType.lab, "text": "LAB Method" },
     { "id": ColorCorrectionType.shift, "text": "Shifting Method" }
-];
+    ];
 
 export default function CBSettings({config, fonts, onChange}: CbSettingsProps) {
     return (
@@ -77,7 +77,7 @@ export default function CBSettings({config, fonts, onChange}: CbSettingsProps) {
                         </div>
                     </div>
                     <div class="cb-settings__cb-select-container">
-                        <Select
+                        {/* <Select
                             value={colorCorrectionTypes.find(x => x.id == config.colorCorrectionType).text}
                             onChange={(value) => onChange({colorCorrectionType: value})}
                             options={colorCorrectionTypes.reduce((map, x) => {
@@ -91,7 +91,7 @@ export default function CBSettings({config, fonts, onChange}: CbSettingsProps) {
                         />
                         <label class="cb-settings__cb-select-container__label">
                             {getLocalMessage('select_type_of_cb_correction')}
-                        </label>
+                        </label> */}
                     </div>
                 </div>
                 <div class="cb-settings__cb-select-container__line">
