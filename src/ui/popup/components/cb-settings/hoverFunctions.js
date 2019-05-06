@@ -221,7 +221,7 @@ export function hoverFunVer2(){
                             }
                             
                         }
-                                //TODO change these values !!!
+                                
                                 //NAMED COLOR                       //ACTUAL COLOR
                         switch (rgbArrayMinIndex) {
                             //Pink Colors
@@ -275,7 +275,7 @@ export function hoverFunVer2(){
                                 rgb_final_color = "Light Orange";   //coral
                                 break;
                             case 15:
-                                rgb_final_color = "Dark Orange";    //dark orange
+                                rgb_final_color = "Orange";         //dark orange
                                 break;
                             case 16:
                                 rgb_final_color = "Orange";         //orange red
@@ -417,7 +417,7 @@ export function hoverFunVer2(){
                                 rgb_final_color = "Light Blue"      //deep sky blue
                                 break;
                             case 59:
-                                rgb_final_color = "Blue"            //dodger blue
+                                rgb_final_color = "Light Blue"      //dodger blue
                                 break;
                             case 60:
                                 rgb_final_color = "Light Blue"      //cornflower blue
