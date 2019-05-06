@@ -105,7 +105,7 @@ export default function CBSettings({config, fonts, onChange}: CbSettingsProps) {
                         onChange={(value) => onChange({colorblindnessSensitivity: value / 100})}
                     />
                     <div class="cb-settings__cb-select-container" style="width: 30%;">
-                        <Button onclick={() => window.open('http://www.mscs.mu.edu/~cmorley/paint.html', '_blank')}>
+                        <Button onclick={() => window.open('https://cmorley191.github.io/illumify/calibrate.html', '_blank')}>
                             {getLocalMessage('calibrate_colorblindness')}
                         </Button>
                     </div>
